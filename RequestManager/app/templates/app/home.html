@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('.slider').bxSlider({
+          mode: 'fade',//horizontal, vertical, fade
+          auto: true,
+          pause: 2000
+      });
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+  <div style="padding-top:50px; text-align:center;">
+    <h1>MÉTRICAS</h1>
+    <br><br>
+    <iframe width="1220" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiMTQ5MjZlMWQtOWI2Yy00MzU3LTlkMTktNzQyNWViZWUyZTM4IiwidCI6ImE0ZDViMzAyLTc4MjctNGVkYy04NmVlLWJlYjI3NDNmMjA2ZCIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+  </div>
+</div>
+{% endblock %}

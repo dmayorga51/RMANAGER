@@ -1,0 +1,41 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+{% load crispy_forms_tags %}
+
+        <br>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                            <h2>Ingresa tu Solicitud</h2>
+                            <hr>
+                            <form enctype="multipart/form-data" action="" class="" method="post"> <! -- usar metodo post por seguridad para que no muestre los datos  ej una contraseña-->
+
+                                {% csrf_token %}  <! -- token de seguridad obligatorio para  ingresar los datos-->
+
+                                {{ form | crispy}} <! -- | es un filtro para cada vez que pase algo por aqui le agregue el form control -->
+
+                            <br>
+                            <div class="d-flex justify-content-end">
+                                <input type="reset" value="Limpiar" class="btn btn-secondary">
+                                &nbsp;
+                                <button type="submit" id="btnEnviar" class="btn btn-primary">Enviar</button>  <! -- botón tipo submit recarga la pagina y envia los datos -->
+                            </div>
+            
+
+                        </form>
+                        {{ mensaje }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <table id="tablacontactos">
+            
+        </table>
+        <br>
+
+{% endblock %}
