@@ -1,0 +1,76 @@
+{% extends 'app/base.html' %}
+
+{% block js %}
+
+<script>
+    function eliminarProducto(id) {
+        Swal.fire({
+            "title":"¿Estas seguro?",
+            "text":"Esta acción no se puede deshacer.",
+            "icon":"question",
+            "showCancelButton":true,
+            "cancelButtonText":"No, Cancelar",
+            "confirmButtonText":"Si, Eliminar",
+            "reverseButtons":true,
+            "confirmButtonColor":"#dc3545"
+
+        })
+        .then(function(result) {
+            if(result.isConfirmed) {
+                window.location.href = "/eliminar-solicitudes/"+id+"/"
+            }
+        })
+    }
+</script>
+
+{% endblock %}
+
+{% block contenido %}
+{% load humanize %}
+<br><br>    
+<div class="card">
+    <div class="card-body">
+        <h2> Solicitudes Ingresadas </h2>
+        <hr>
+        <table class="table table-striped table-hover table-responsive-sm">
+        <tr>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th>Fecha de Ingreso</th>
+            <th>Opciones</th>
+            <th></th>
+            
+        </tr>
+
+        {% for p in entity %}
+        <tr>
+            <td>{{ p.id | title }}</td>
+            <td>{{ p.nombre | title }}</td>
+            <td>{{ p.tipo | title }}</td>
+            <td>{{ p.estado | title }}</td>
+            <td>{{ p.prioridad | title}}</td>
+            <td>{{ p.fecha_ingreso | title }}</td>
+            <td>
+                <a href="{% url 'modificar_solicitudes' p.id %}" class="btn btn-info btn-sm">Modificar</a>            
+            </td>
+            <td>
+                <a href="#" onclick="eliminarProducto({{ p.id }})" class="btn btn-danger btn-sm">Eliminar</a>            
+            </td>
+        </tr>
+        {% endfor %}
+
+        </table>
+        <hr>
+        <div>
+            {% include 'app/paginator.html'%}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
